@@ -1,34 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pyramide AR Test</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  </head>
-  <body>
-<H2>pyramide AR Test</H2>
-  <model-viewer src="untitled.glb"
-                ios-src="Untitled.usdz"
-                alt="pyramide"
-                ar
-                auto-rotate
-                camera-controls
-                ar-modes="webxr scene-viewer quick-look" 
-                environment-image="neutral">   
-  </model-viewer>
- <script>
-        async function checkARCoreCompatibility() {
-            const modelViewer = document.getElementById('model-viewer');
-            const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
-            if (!isARCoreSupported) {
-                modelViewer.removeAttribute('ar');
-                modelViewer.removeAttribute('ar-modes');
-                alert('Your device is not compatible with AR features. You can still view the 3D model.');
+    <title>Galaxy Rockets</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('https://source.unsplash.com/1600x900/?galaxy') no-repeat center center/cover;
+        }
+        .rocket {
+            position: absolute;
+            width: 100px;
+            transition: transform 3s linear;
+        }
+        @keyframes fly {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(-10vh) rotate(360deg);
             }
         }
-
-        document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+    </style>
+</head>
+<body>
+    <script>
+        function createRocket() {
+            let rocket = document.createElement('img');
+            rocket.src = 'https://upload.wikimedia.org/wikipedia/commons/3/3a/SpaceX_Falcon_9_icon.png';
+            rocket.classList.add('rocket');
+            document.body.appendChild(rocket);
+            
+            let startX = Math.random() * window.innerWidth;
+            rocket.style.left = `${startX}px`;
+            rocket.style.bottom = '-100px';
+            rocket.style.animation = `fly ${Math.random() * 3 + 2}s linear infinite`;
+        }
+        
+        setInterval(createRocket, 1000);
     </script>
-   </body>
+</body>
 </html>
