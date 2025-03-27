@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="de" dir="ltr">
-<head>
+<html lang="en" dir="ltr">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pyramide AR Test</title>
@@ -9,8 +9,12 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: blue; /* Blauer Hintergrund */
+            background: linear-gradient(135deg, #b0b0b0, #e0e0e0);
             position: relative;
+            color: rgba(0, 0, 0, 0.3);
+            font-size: 10px;
+            line-height: 1.4;
+            font-family: Arial, sans-serif;
         }
         .container {
             display: flex;
@@ -25,31 +29,24 @@
             position: relative;
             z-index: 2;
         }
-        .floating-elements {
+        .text-overlay {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-        }
-        .ball, .dollar {
-            position: absolute;
-            font-size: 30px;
-            animation: float 5s infinite alternate ease-in-out;
-        }
-        .ball {
-            color: red;
-        }
-        .dollar {
-            color: black;
-        }
-        @keyframes float {
-            from { transform: translateY(0); }
-            to { transform: translateY(20px); }
+            overflow: hidden;
+            white-space: pre-wrap;
+            opacity: 0.5;
+            padding: 20px;
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
+        <div class="text-overlay">
+            Genesis 1:1 Im Anfang schuf Gott Himmel und Erde.
+        </div>
         <model-viewer id="model-viewer"
                       src="untitled.glb"
                       ios-src="Untitled.usdz"
@@ -61,23 +58,18 @@
                       environment-image="neutral">   
         </model-viewer>
     </div>
-    <div class="floating-elements"></div>
-
+    
     <script>
-        function addFloatingElements() {
-            const container = document.querySelector('.floating-elements');
-            for (let i = 0; i < 30; i++) {
-                let element = document.createElement('div');
-                element.classList.add(Math.random() > 0.5 ? 'ball' : 'dollar');
-                element.textContent = element.classList.contains('ball') ? '⚽' : '$';
-                element.style.left = Math.random() * 100 + "vw";
-                element.style.top = Math.random() * 100 + "vh";
-                element.style.animationDuration = (3 + Math.random() * 3) + "s";
-                container.appendChild(element);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', addFloatingElements);
+      async function checkARCoreCompatibility() {
+          const modelViewer = document.getElementById('model-viewer');
+          if (!navigator.xr || !(await navigator.xr.isSessionSupported('immersive-ar'))) {
+              modelViewer.removeAttribute('ar');
+              modelViewer.removeAttribute('ar-modes');
+              alert('Your device is not compatible with AR features. You can still view the 3D model.');
+          }
+      }
+      document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
     </script>
-</body>
+  </body>
 </html>
 
