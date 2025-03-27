@@ -11,10 +11,6 @@
             overflow: hidden;
             background: blue; /* Blauer Hintergrund */
             position: relative;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 10px;
-            line-height: 1.4;
-            font-family: Arial, sans-serif;
         }
         .container {
             display: flex;
@@ -29,35 +25,22 @@
             position: relative;
             z-index: 2;
         }
-        .text-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            opacity: 0.8;
-            animation: scrollText 10s linear infinite;
-        }
-        @keyframes scrollText {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
-        .gif-container {
+        .floating-elements {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
         }
-        .gif {
+        .ball, .dollar {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            font-size: 30px;
             animation: float 5s infinite alternate ease-in-out;
+        }
+        .ball {
+            color: red;
+        }
+        .dollar {
+            color: black;
         }
         @keyframes float {
             from { transform: translateY(0); }
@@ -67,7 +50,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="text-overlay">Genesis 1:1 Im Anfang schuf Gott Himmel und Erde.  —  Genesis 1:1 Im Anfang schuf Gott Himmel und Erde.</div>
         <model-viewer id="model-viewer"
                       src="untitled.glb"
                       ios-src="Untitled.usdz"
@@ -79,29 +61,22 @@
                       environment-image="neutral">   
         </model-viewer>
     </div>
-    <div class="gif-container"></div>
+    <div class="floating-elements"></div>
 
     <script>
-        function addRandomGifs() {
-            const gifUrls = [
-                "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif",
-                "https://media.giphy.com/media/l0HlPjezGYjHszqM0/giphy.gif",
-                "https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif",
-                "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif",
-                "https://media.giphy.com/media/3o7abldj0b3rxrZUxW/giphy.gif"
-            ];
-            const container = document.querySelector('.gif-container');
-            for (let i = 0; i < 10; i++) {
-                let gif = document.createElement('img');
-                gif.src = gifUrls[Math.floor(Math.random() * gifUrls.length)];
-                gif.classList.add('gif');
-                gif.style.left = Math.random() * 90 + "%";
-                gif.style.top = Math.random() * 90 + "%";
-                gif.style.animationDuration = (3 + Math.random() * 3) + "s";
-                container.appendChild(gif);
+        function addFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            for (let i = 0; i < 30; i++) {
+                let element = document.createElement('div');
+                element.classList.add(Math.random() > 0.5 ? 'ball' : 'dollar');
+                element.textContent = element.classList.contains('ball') ? '⚽' : '$';
+                element.style.left = Math.random() * 100 + "vw";
+                element.style.top = Math.random() * 100 + "vh";
+                element.style.animationDuration = (3 + Math.random() * 3) + "s";
+                container.appendChild(element);
             }
         }
-        document.addEventListener('DOMContentLoaded', addRandomGifs);
+        document.addEventListener('DOMContentLoaded', addFloatingElements);
     </script>
 </body>
 </html>
