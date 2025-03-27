@@ -1,45 +1,79 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxy Rockets</title>
+    <title>pyramide AR Test</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            background: url('https://source.unsplash.com/1600x900/?galaxy') no-repeat center center/cover;
+            background: url('https://source.unsplash.com/1600x900/?space,stars') no-repeat center center/cover;
+            position: relative;
         }
-        .rocket {
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        model-viewer {
+            width: 80vw;
+            height: 80vh;
+        }
+        .planet, .ufo {
             position: absolute;
             width: 100px;
-            transition: transform 3s linear;
+            animation: float 10s infinite alternate ease-in-out;
         }
-        @keyframes fly {
-            from {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            to {
-                transform: translateY(-10vh) rotate(360deg);
-            }
+        .planet {
+            top: 10%;
+            left: 20%;
+        }
+        .ufo {
+            top: 60%;
+            left: 70%;
+            animation: moveUFO 5s infinite linear;
+        }
+        @keyframes moveUFO {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-50px) translateY(-20px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+        <model-viewer id="model-viewer"
+                      src="Untitled.glb"
+                      ios-src="untitled.usdz"
+                      alt="Pyramide"
+                      ar
+                      auto-rotate
+                      camera-controls
+                      ar-modes="webxr scene-viewer quick-look" 
+                      environment-image="neutral">   
+        </model-viewer>
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Mars_23_aug_2003_hubble.jpg" class="planet" alt="Planet">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/UFO-Clipart.png" class="ufo" alt="UFO">
+    
     <script>
-        function createRocket() {
-            let rocket = document.createElement('img');
-            rocket.src = 'https://upload.wikimedia.org/wikipedia/commons/3/3a/SpaceX_Falcon_9_icon.png';
-            rocket.classList.add('rocket');
-            document.body.appendChild(rocket);
-            
-            let startX = Math.random() * window.innerWidth;
-            rocket.style.left = `${startX}px`;
-            rocket.style.bottom = '-100px';
-            rocket.style.animation = `fly ${Math.random() * 3 + 2}s linear infinite`;
-        }
-        
-        setInterval(createRocket, 1000);
+      async function checkARCoreCompatibility() {
+          const modelViewer = document.getElementById('model-viewer');
+          if (!navigator.xr || !(await navigator.xr.isSessionSupported('immersive-ar'))) {
+              modelViewer.removeAttribute('ar');
+              modelViewer.removeAttribute('ar-modes');
+              alert('Your device is not compatible with AR features. You can still view the 3D model.');
+          }
+      }
+      document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
     </script>
-</body>
+  </body>
 </html>
+
