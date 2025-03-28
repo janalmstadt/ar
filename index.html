@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+<html lang="de" dir="ltr">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schuldenpanzer</title>
@@ -12,13 +12,9 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #3c4b35;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cpath fill='%23000' d='M150 50c-55.2 0-100 44.8-100 100s44.8 100 100 100 100-44.8 100-100S205.2 50 150 50zm-50 87.5c-12.4 0-22.5-10.1-22.5-22.5s10.1-22.5 22.5-22.5 22.5 10.1 22.5 22.5-10.1 22.5-22.5 22.5zm100 0c-12.4 0-22.5-10.1-22.5-22.5s10.1-22.5 22.5-22.5 22.5 10.1 22.5 22.5-10.1 22.5-22.5 22.5zm-50 50c-22.1 0-40-17.9-40-40h80c0 22.1-17.9 40-40 40z' opacity='0.7' fill='%23FF0000'/%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cpath fill='black' d='M150 50c-55.2 0-100 44.8-100 100 0 33.4 16.4 63 41.5 81.5l-25.5 25.5 21.2 21.2 25.8-25.8c18.1 12.5 40.3 19.6 64 19.6s45.9-7.1 64-19.6l25.8 25.8 21.2-21.2-25.5-25.5c25.1-18.5 41.5-48.1 41.5-81.5 0-55.2-44.8-100-100-100zm-50 87.5c-12.4 0-22.5-10.1-22.5-22.5S87.6 92.5 100 92.5s22.5 10.1 22.5 22.5-10.1 22.5-22.5 22.5zm100 0c-12.4 0-22.5-10.1-22.5-22.5s10.1-22.5 22.5-22.5 22.5 10.1 22.5 22.5-10.1 22.5-22.5 22.5zm-50 50c-22.1 0-40-17.9-40-40h80c0 22.1-17.9 40-40 40z' opacity='0.6'/%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'%3E%3Crect width='200' height='100' fill='%2300a86b' opacity='0.2'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='black' font-size='30' font-family='Arial' opacity='0.5'%3E500€%3C/text%3E%3C/svg%3E");
-            background-repeat: repeat, repeat, repeat;
-            background-size: 300px 300px, 300px 300px, 200px 100px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/74/Bundeswehr_Flecktarn.jpg');
+            background-size: cover;
+            background-position: center;
         }
         .title {
             position: absolute;
@@ -40,6 +36,7 @@
             align-items: center;
             width: 100vw;
             height: 100vh;
+            position: relative;
         }
         model-viewer {
             width: 100%;
@@ -48,13 +45,31 @@
             max-height: 800px;
             margin: 0 auto;
         }
+        .money-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .money {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            opacity: 0.9;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-10vh) rotate(360deg); }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="title">SCHULDENPANZER</div>
     <div class="container">
         <model-viewer id="model-viewer"
-                      src="schuldenpanzer.compressed.glb"
+                      src="untitled.glb"
                       ios-src="Untitled.usdz"
                       alt="Schulden-Panzer"
                       ar
@@ -64,18 +79,23 @@
                       environment-image="neutral">   
         </model-viewer>
     </div>
-    
+    <div class="money-container"></div>
+
     <script>
-      async function checkARCoreCompatibility() {
-          const modelViewer = document.getElementById('model-viewer');
-          if (!navigator.xr || !(await navigator.xr.isSessionSupported('immersive-ar'))) {
-              modelViewer.removeAttribute('ar');
-              modelViewer.removeAttribute('ar-modes');
-              alert('Your device is not compatible with AR features. You can still view the 3D model.');
-          }
-      }
-      document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+        function addMoneyRain() {
+            const container = document.querySelector('.money-container');
+            for (let i = 0; i < 30; i++) {
+                let money = document.createElement('img');
+                money.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/EUR_500_obverse_%282002_issue%29.jpg/320px-EUR_500_obverse_%282002_issue%29.jpg';
+                money.classList.add('money');
+                money.style.left = Math.random() * 100 + "vw";
+                money.style.animationDuration = (3 + Math.random() * 5) + "s";
+                container.appendChild(money);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', addMoneyRain);
     </script>
-  </body>
+</body>
 </html>
+
 
