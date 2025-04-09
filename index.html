@@ -1,31 +1,206 @@
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="de" dir="ltr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schuldenpanzer</title>
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schuldenpanzer</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bauhaus+93&family=Open+Sans:wght@400;700&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #4b5320;
+      color: #f0f0f0;
+      font-family: 'Bauhaus 93', sans-serif;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #2a3110;
+    }
+    
+    h1 {
+      font-family: 'Bauhaus 93', sans-serif;
+      font-size: 3.5rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin: 0;
+      color: #f0f0f0;
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    }
+    
+    .model-container {
+      width: 100%;
+      height: 500px;
+      margin: 0 auto 40px;
+      position: relative;
+      background-color: #3a4119;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      --poster-color: #3a4119;
+    }
+    
+    .ar-button {
+      margin: 20px auto;
+      display: block;
+      background-color: #d4af37;
+      color: #333;
+      border: none;
+      padding: 12px 24px;
+      font-family: 'Bauhaus 93', sans-serif;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .ar-button:hover {
+      background-color: #f0c04a;
+      transform: scale(1.05);
+    }
+    
+    .article {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    
+    .article h2 {
+      font-family: 'Bauhaus 93', sans-serif;
+      color: #d4af37;
+      margin-top: 0;
+    }
+    
+    .article p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    
+    .sources {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 6px;
+    }
+    
+    .sources h3 {
+      color: #d4af37;
+      font-family: 'Bauhaus 93', sans-serif;
+      margin-top: 0;
+    }
+    
+    .sources ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+    
+    .sources li {
+      margin-bottom: 10px;
+    }
+    
+    .sources a {
+      color: #a0d6b4;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .sources a:hover {
+      color: #d4af37;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .model-container {
+        height: 400px;
+      }
+      
+      .article {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
 <body>
-<H2>Schuldenpanzer</H2>
-<model-viewer src="Schuldenpanzerfinal1.glb"
-ios-src="Schuldenpanzerfinal1.usdz"
-alt="Schuldenpanzer"
-ar
-auto-rotate
-camera-controls
-ar-modes="webxr scene-viewer quick-look"
-environment-image="neutral">
-</model-viewer>
-<script>
-async function checkARCoreCompatibility() {
-const modelViewer = document.getElementById('model-viewer');
-const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
-if (!isARCoreSupported) {
-modelViewer.removeAttribute('ar');
-modelViewer.removeAttribute('ar-modes');
-alert('Your device is not compatible with AR features. You can still view the 3D model.');
-}
+  <div class="container">
+    <header>
+      <h1>Schuldenpanzer</h1>
+    </header>
+    
+    <div class="model-container">
+      <model-viewer id="tank-model" 
+        src="Schuldenpanzerfinal1.glb"
+        ios-src="Schuldenpanzerfinal1.usdz"
+        alt="Schuldenpanzer 3D Modell"
+        ar
+        auto-rotate
+        camera-controls
+        ar-modes="webxr scene-viewer quick-look"
+        environment-image="neutral">
+      </model-viewer>
+    </div>
+    
+    <button class="ar-button" onclick="activateAR()">IN AR ANSEHEN</button>
+    
+    <div class="article">
+      <h2>Der Schuldenpanzer</h2>
+      <!-- Hier wird später der eigentliche Text eingefügt -->
+      
+      <div class="sources">
+        <h3>Quellen</h3>
+        <!-- Hier werden später die tatsächlichen Quellen eingefügt -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function activateAR() {
+      const modelViewer = document.getElementById('tank-model');
+      modelViewer.activateAR();
+    }
+    
+    async function checkARCoreCompatibility() {
+      try {
+        const modelViewer = document.getElementById('tank-model');
+        const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
+        
+        if (!isARCoreSupported) {
+          modelViewer.removeAttribute('ar');
+          modelViewer.removeAttribute('ar-modes');
+          document.querySelector('.ar-button').style.display = 'none';
+          console.log('AR nicht unterstützt auf diesem Gerät');
+        }
+      } catch (e) {
+        console.log('AR-Kompatibilitätsprüfung fehlgeschlagen', e);
+        document.querySelector('.ar-button').style.display = 'none';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+  </script>
+</body>
+</html>
 }
 
     document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);  
