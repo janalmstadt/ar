@@ -7,14 +7,15 @@
   <title>Schuldenpanzer</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bauhaus+93&family=Open+Sans:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap');
+    /* Fallback für Futura, da es nicht direkt in Google Fonts verfügbar ist */
     
     body {
       margin: 0;
       padding: 0;
       background-color: #4b5320;
       color: #f0f0f0;
-      font-family: 'Bauhaus 93', sans-serif;
+      font-family: 'Futura', 'Century Gothic', sans-serif;
       line-height: 1.6;
     }
     
@@ -32,7 +33,7 @@
     }
     
     h1 {
-      font-family: 'Bauhaus 93', sans-serif;
+      font-family: 'Futura', 'Century Gothic', sans-serif;
       font-size: 3.5rem;
       text-transform: uppercase;
       letter-spacing: 3px;
@@ -65,7 +66,7 @@
       color: #333;
       border: none;
       padding: 12px 24px;
-      font-family: 'Bauhaus 93', sans-serif;
+      font-family: 'Futura', 'Century Gothic', sans-serif;
       font-size: 1.2rem;
       border-radius: 5px;
       cursor: pointer;
@@ -85,9 +86,18 @@
     }
     
     .article h2 {
-      font-family: 'Bauhaus 93', sans-serif;
+      font-family: 'Futura', 'Century Gothic', sans-serif;
       color: #d4af37;
       margin-top: 0;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    
+    .article h3 {
+      font-family: 'Futura', 'Century Gothic', sans-serif;
+      color: #d4af37;
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
     
     .article p {
@@ -99,11 +109,12 @@
       background-color: rgba(0, 0, 0, 0.2);
       padding: 20px;
       border-radius: 6px;
+      margin-top: 30px;
     }
     
     .sources h3 {
       color: #d4af37;
-      font-family: 'Bauhaus 93', sans-serif;
+      font-family: 'Futura', 'Century Gothic', sans-serif;
       margin-top: 0;
     }
     
@@ -125,6 +136,17 @@
     .sources a:hover {
       color: #d4af37;
       text-decoration: underline;
+    }
+    
+    .military-list {
+      background-color: rgba(0, 0, 0, 0.15);
+      padding: 15px 25px;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    
+    .military-list p {
+      margin: 10px 0;
     }
     
     @media (max-width: 768px) {
@@ -164,12 +186,76 @@
     <button class="ar-button" onclick="activateAR()">IN AR ANSEHEN</button>
     
     <div class="article">
-      <h2>Der Schuldenpanzer</h2>
-      <!-- Hier wird später der eigentliche Text eingefügt -->
+      <h2>Die sicherheitspolitische Landschaft Europas 2025</h2>
+      
+      <p>Die sicherheitspolitische Landschaft Europas hat sich im Jahr 2025 erheblich verändert, insbesondere durch die erneute Amtsübernahme von US-Präsident Donald Trump im Januar 2025. Diese Entwicklung hat direkte Auswirkungen auf die Verteidigungspolitik Deutschlands und der NATO-Staaten.</p>
+
+      <h3>Forderung nach erhöhten Verteidigungsausgaben</h3>
+      
+      <p>Kurz nach seinem Amtsantritt forderte Präsident Trump von den NATO-Mitgliedstaaten, ihre Verteidigungsausgaben auf fünf Prozent des Bruttoinlandsprodukts (BIP) zu erhöhen. Er argumentierte, dass die bisherigen zwei Prozent nicht ausreichten und betonte: "Sie können es sich alle leisten."</p>
+
+      <h3>Reaktionen und finanzielle Implikationen für Deutschland</h3>
+      
+      <p>Diese Forderung stellt Deutschland vor erhebliche finanzielle Herausforderungen. Bei einem BIP von etwa 4,19 Billionen Euro im Jahr 2023 würden fünf Prozent etwa 209,5 Milliarden Euro entsprechen, was eine Verdopplung der aktuellen Verteidigungsausgaben bedeuten würde. Politiker und Experten in Deutschland reagierten zurückhaltend auf Trumps Forderung. Es wird befürchtet, dass eine derartige Erhöhung andere wichtige Haushaltsbereiche belasten könnte.</p>
+
+      <h3>Aktuelle Beschlüsse des Deutschen Bundestages 2025</h3>
+      
+      <p>Im März 2025 verabschiedete der Deutsche Bundestag unter der Regierung von Bundeskanzler Friedrich Merz eine Gesetzesänderung, die eine erhebliche Ausweitung der Staatsverschuldung ermöglicht, um die Verteidigungsausgaben zu erhöhen. Diese Änderung erlaubt es, Verteidigungsausgaben, die über ein Prozent des BIP hinausgehen, von der Schuldenbremse auszunehmen. Zudem wurde ein Sonderfonds in Höhe von 500 Milliarden Euro für Infrastrukturprojekte eingerichtet. Merz betonte, dass diese Maßnahmen notwendig seien, um den aktuellen sicherheitspolitischen Herausforderungen gerecht zu werden.</p>
+
+      <h3>Geplante Beschaffungen und deren Kosten</h3>
+      
+      <p>Mit den zusätzlichen Mitteln plant die Bundesregierung umfangreiche Investitionen in die Modernisierung der Bundeswehr. Dazu gehören unter anderem:</p>
+      
+      <div class="military-list">
+        <p>Kampfpanzer Leopard 2A8: Beschaffung von 18 zusätzlichen Einheiten zu einem Stückpreis von etwa 15 Millionen Euro, insgesamt rund 270 Millionen Euro.</p>
+        
+        <p>Schützenpanzer Puma: Nachrüstung von 143 Fahrzeugen auf den modernsten Konstruktionsstandard S1 für insgesamt 2,6 Milliarden Euro.</p>
+        
+        <p>Kampfflugzeuge F-35A: Anschaffung von 35 Jets mit einem Gesamtvolumen von etwa 8 Milliarden Euro.</p>
+        
+        <p>Schwere Transporthubschrauber CH-47F Chinook: Bestellung von 60 Einheiten für insgesamt 5 Milliarden Euro.</p>
+      </div>
+      
+      <p>Diese Investitionen zielen darauf ab, die Einsatzbereitschaft und Schlagkraft der Bundeswehr signifikant zu erhöhen.</p>
+
+      <h3>Deutsche Rüstungsunternehmen und ihre Beteiligung</h3>
+      
+      <p>Mehrere deutsche Unternehmen sind maßgeblich an der Ausstattung der Bundeswehr und dem Export von Rüstungsgütern beteiligt:</p>
+      
+      <div class="military-list">
+        <p>Rheinmetall AG: Beteiligt an der Produktion des Schützenpanzers Puma und des Kampfpanzers Leopard 2. Im Juni 2024 erhielt Rheinmetall einen Auftrag über 8,5 Milliarden Euro zur Lieferung von Artilleriemunition.</p>
+        
+        <p>Krauss-Maffei Wegmann (KMW): Produziert unter anderem den Leopard 2 und die Panzerhaubitze 2000. Das Unternehmen ist Teil der deutsch-französischen KNDS-Gruppe.</p>
+        
+        <p>Thyssenkrupp Marine Systems: Spezialisiert auf den Bau von U-Booten und Marineschiffen.</p>
+        
+        <p>Diehl Defence: Hersteller von Lenkflugkörpern und Munition.</p>
+        
+        <p>MBDA Deutschland: Entwickelt und produziert Lenkflugkörpersysteme.</p>
+        
+        <p>Heckler & Koch: Bekannt für die Produktion von Handfeuerwaffen wie dem G36-Gewehr.</p>
+        
+        <p>Airbus Defence and Space: Beteiligt an der Produktion von Militärflugzeugen und Satellitensystemen.</p>
+      </div>
+      
+      <p>Diese Unternehmen spielen eine zentrale Rolle in der deutschen Sicherheits- und Verteidigungsindustrie und profitieren erheblich von den staatlichen Investitionen in die Bundeswehr.</p>
+
+      <h3>Diskussion über die Wiedereinführung der Wehrpflicht</h3>
+      
+      <p>Die veränderte sicherheitspolitische Lage hat in Deutschland eine intensive Debatte über die Wiedereinführung der Wehrpflicht entfacht.</p>
+      
+      <p>Befürworter argumentieren, dass die Aussetzung der Wehrpflicht nicht mehr zur aktuellen Gefährdungslage passe. Florian Hahn, verteidigungspolitischer Sprecher der CDU/CSU-Bundestagsfraktion, forderte: "Noch im Jahr 2025 müssen die ersten Wehrpflichtigen durch die Kasernentore schreiten." Auch der Vorsitzende des Bundeswehrverbands, André Wüstner, plädierte für eine rasche Wiedereinführung nach skandinavischem Vorbild, um den Personalbedarf der Bundeswehr zu decken.</p>
+      
+      <p>Gegner der Wehrpflicht weisen auf erhebliche praktische und ethische Bedenken hin. Der SPD-Verteidigungsexperte Falko Droßmann bezeichnete die Forderungen als "unmöglich wie auch unzeitgemäß" und betonte den Abbau der notwendigen Strukturen seit der Aussetzung der Wehrpflicht im Jahr 2011.</p>
       
       <div class="sources">
         <h3>Quellen</h3>
-        <!-- Hier werden später die tatsächlichen Quellen eingefügt -->
+        <ul>
+          <li>1&1</li>
+          <li>ZEIT ONLINE</li>
+          <li>Wikipedia – Die freie Enzyklopädie</li>
+          <li>Hasepost Zeitung für Osnabrück</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -199,12 +285,5 @@
     
     document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
   </script>
-</body>
-</html>
-}
-
-    document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);  
-</script>  
-
 </body>
 </html>
