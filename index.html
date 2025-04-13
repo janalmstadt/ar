@@ -1,262 +1,207 @@
-
 <!DOCTYPE html>
 <html lang="de" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schuldenpanzer</title>
+  <title>Schuldenpanzer | Kunstgalerie</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap');
-    /* Fallback für Futura, da es nicht direkt in Google Fonts verfügbar ist */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap');
     
-    body {
+    :root {
+      --primary-color: #000000;
+      --secondary-color: #ffffff;
+      --accent-color: #aaaaaa;
+      --spacing: 40px;
+    }
+    
+    * {
       margin: 0;
       padding: 0;
-      background-color: #4b5320;
-      color: #f0f0f0;
-      font-family: 'Futura', 'Century Gothic', sans-serif;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-color);
       line-height: 1.6;
+      background-image: url('euro-background.jpg');
+      background-repeat: repeat;
+      background-size: 150px; /* Verkleinert für häufige Wiederholung */
+    }
+    
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.92);
+      min-height: 100vh;
     }
     
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 0 20px;
     }
     
     header {
+      padding: var(--spacing) 0;
       text-align: center;
-      padding: 20px 0;
-      margin-bottom: 30px;
-      border-bottom: 3px solid #2a3110;
     }
     
-    h1 {
-      font-family: 'Futura', 'Century Gothic', sans-serif;
-      font-size: 3.5rem;
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      margin: 0;
-      color: #f0f0f0;
-      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    }
+    
+    .gallery {
+      padding: var(--spacing) 0;
+    }
+    
+    .artwork {
+      margin: var(--spacing) 0;
+    }
+    
+    .artwork-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    
+    .artist {
+      font-size: 1rem;
+      color: var(--accent-color);
+      margin-bottom: var(--spacing);
+      font-style: italic;
+      text-align: center;
     }
     
     .model-container {
       width: 100%;
-      height: 500px;
-      margin: 0 auto 40px;
+      height: 70vh;
+      background-color: #f8f8f8;
       position: relative;
-      background-color: #3a4119;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: var(--spacing);
     }
     
     model-viewer {
       width: 100%;
       height: 100%;
-      --poster-color: #3a4119;
+      --poster-color: #f8f8f8;
     }
     
     .ar-button {
-      margin: 20px auto;
-      display: block;
-      background-color: #d4af37;
-      color: #333;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
       border: none;
-      padding: 12px 24px;
-      font-family: 'Futura', 'Century Gothic', sans-serif;
-      font-size: 1.2rem;
-      border-radius: 5px;
+      padding: 12px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
       cursor: pointer;
       transition: all 0.3s ease;
+      z-index: 10;
     }
     
     .ar-button:hover {
-      background-color: #f0c04a;
-      transform: scale(1.05);
+      background-color: var(--accent-color);
     }
     
-    .article {
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 8px;
+    .artwork-text {
+      margin: var(--spacing) 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .artwork-description {
+      font-size: 1.05rem;
+      line-height: 1.8;
       margin-bottom: 40px;
     }
     
-    .article h2 {
-      font-family: 'Futura', 'Century Gothic', sans-serif;
-      color: #d4af37;
-      margin-top: 0;
+    .artwork-description p {
       margin-bottom: 20px;
-      text-transform: uppercase;
     }
     
-    .article h3 {
-      font-family: 'Futura', 'Century Gothic', sans-serif;
-      color: #d4af37;
-      margin-top: 30px;
-      margin-bottom: 15px;
-    }
-    
-    .article p {
-      margin-bottom: 20px;
-      text-align: justify;
-    }
-    
-    .sources {
-      background-color: rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      border-radius: 6px;
-      margin-top: 30px;
-    }
-    
-    .sources h3 {
-      color: #d4af37;
-      font-family: 'Futura', 'Century Gothic', sans-serif;
-      margin-top: 0;
-    }
-    
-    .sources ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-    
-    .sources li {
-      margin-bottom: 10px;
-    }
-    
-    .sources a {
-      color: #a0d6b4;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .sources a:hover {
-      color: #d4af37;
-      text-decoration: underline;
-    }
-    
-    .military-list {
-      background-color: rgba(0, 0, 0, 0.15);
-      padding: 15px 25px;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
-    
-    .military-list p {
-      margin: 10px 0;
+    footer {
+      padding: var(--spacing) 0;
+      border-top: 1px solid var(--accent-color);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      margin-top: 60px;
     }
     
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
+      .artwork-title {
+        font-size: 2rem;
       }
       
       .model-container {
-        height: 400px;
+        height: 50vh;
       }
       
-      .article {
-        padding: 20px;
+      .artwork-description {
+        font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Schuldenpanzer</h1>
-    </header>
-    
-    <div class="model-container">
-      <model-viewer id="tank-model" 
-        src="panzerkugel.glb"
-        ios-src="panzerkugel.usdz"
-        alt="Schuldenpanzer 3D Modell"
-        ar
-        auto-rotate
-        camera-controls
-        ar-modes="webxr scene-viewer quick-look"
-        environment-image="neutral">
-      </model-viewer>
-    </div>
-    
-    <button class="ar-button" onclick="activateAR()">IN AR ANSEHEN</button>
-    
-    <div class="article">
-      <h2>Die sicherheitspolitische Landschaft Europas 2025</h2>
+  <div class="overlay">
+    <div class="container">
+      <header>
+        <div class="logo">Schuldenpanzer</div>
+      </header>
       
-      <p>Die sicherheitspolitische Landschaft Europas hat sich im Jahr 2025 erheblich verändert, insbesondere durch die erneute Amtsübernahme von US-Präsident Donald Trump im Januar 2025. Diese Entwicklung hat direkte Auswirkungen auf die Verteidigungspolitik Deutschlands und der NATO-Staaten.</p>
+      <main class="gallery">
+        <article class="artwork">
+          <p class="artist">Zeitgenössische Installation, 2025</p>
+          
+          <div class="model-container">
+            <model-viewer id="tank-model" 
+              src="Schuldenpanzerfinal1.glb"
+              ios-src="Schuldenpanzerfinal1.usdz"
+              alt="Schuldenpanzer 3D Modell"
+              ar
+              auto-rotate
+              camera-controls
+              ar-modes="webxr scene-viewer quick-look"
+              environment-image="neutral">
+            </model-viewer>
+            <button class="ar-button" onclick="activateAR()">IN AR BETRACHTEN</button>
+          </div>
+          
+          <div class="artwork-text">
+            <div class="artwork-description">
+              <p>Die globale Sicherheitspolitik steht im Jahr 2025 vor großen Herausforderungen. Seit der Amtseinführung Donald Trumps im Januar, brechen die USA mit gewohnten Sicherheitsversprechen innerhalb der NATO, sodass die europäische Verteidigung und die Sicherheit und Souveränität Deutschlands im Fokus steht. Eine große Debatte, um die Wehrfähigkeit des Landes, insbesondere in Hinblick auf die Bedrohung durch Russland und seinen Angriffskrieg gegen die Ukraine, der seit 2022 läuft, beschäftigt Politik und Gesellschaft gegenwärtig.</p>
 
-      <h3>Forderung nach erhöhten Verteidigungsausgaben</h3>
-      
-      <p>Kurz nach seinem Amtsantritt forderte Präsident Trump von den NATO-Mitgliedstaaten, ihre Verteidigungsausgaben auf fünf Prozent des Bruttoinlandsprodukts (BIP) zu erhöhen. Er argumentierte, dass die bisherigen zwei Prozent nicht ausreichten und betonte: "Sie können es sich alle leisten."</p>
+              <p>Nach der Bundestagswahl im Februar, verkündete der angehende Bundeskanzler Friedrich Merz, aus der CDU, eine massive Neuverschuldung Deutschlands, um ein Vielfaches der bisherigen, jährlichen Ausgaben in die Bundeswehr zu investieren. Dafür steht eine Investitionssumme von 500 Milliarden Euro, über einen Zeitraum von zwölf Jahren, im Raum. Bei Anschaffungen die mehr als ein Prozent des deutschen Bruttoinlandproduktes kosten sollen, werde es nach oben keine Ausgabengrenze geben.</p>
 
-      <h3>Reaktionen und finanzielle Implikationen für Deutschland</h3>
-      
-      <p>Diese Forderung stellt Deutschland vor erhebliche finanzielle Herausforderungen. Bei einem BIP von etwa 4,19 Billionen Euro im Jahr 2023 würden fünf Prozent etwa 209,5 Milliarden Euro entsprechen, was eine Verdopplung der aktuellen Verteidigungsausgaben bedeuten würde. Politiker und Experten in Deutschland reagierten zurückhaltend auf Trumps Forderung. Es wird befürchtet, dass eine derartige Erhöhung andere wichtige Haushaltsbereiche belasten könnte.</p>
+              <p>Die Frage, ob eine bloße Erhöhung der Investitionen, zulasten künftiger Generationen, tatsächlich den gewünschten Effekt, die Verbesserung der Verteidigungsmöglichkeiten des Landes, erzielt, wird dabei zunächst ausgeklammert. Es bleibt fraglich ob solch eine enorme Neuverschuldung, die Probleme einer wehrunfähigen und maroden Bundeswehr einfach wegkaufen kann. Grundsatzdebatten über die Funktion der Armee und den Einsatz im Ernstfall bleiben aus, stattdessen propagieren Politiker:innen großartige Innovationen der Militärtechnologie und beschwören eine neue Faszination für Aufrüstung und Krieg.</p>
 
-      <h3>Aktuelle Beschlüsse des Deutschen Bundestages 2025</h3>
-      
-      <p>Im März 2025 verabschiedete der Deutsche Bundestag unter der Regierung von Bundeskanzler Friedrich Merz eine Gesetzesänderung, die eine erhebliche Ausweitung der Staatsverschuldung ermöglicht, um die Verteidigungsausgaben zu erhöhen. Diese Änderung erlaubt es, Verteidigungsausgaben, die über ein Prozent des BIP hinausgehen, von der Schuldenbremse auszunehmen. Zudem wurde ein Sonderfonds in Höhe von 500 Milliarden Euro für Infrastrukturprojekte eingerichtet. Merz betonte, dass diese Maßnahmen notwendig seien, um den aktuellen sicherheitspolitischen Herausforderungen gerecht zu werden.</p>
+              <p>Die größten Profiteure der Investitionen sind allerdings nicht die Bürgerinnen und Bürger, sondern Rüstungskonzerne, Lobbyisten und Aktionäre. Unzählige deutsche Unternehmen sind direkt oder indirekt an der Produktion von Rüstungsgütern und Ausrüstung beteiligt. Das neue Sondervermögen ist die größte Subvention einer Branche jemals. So sollen beispielsweise 18 weitere Leopard 2A8 Panzer, die modernsten Kampfpanzer der Welt, zu einem Preis von etwa 270 Millionen Euro angeschafft werden. Die Leopard Panzer werden von dem düsseldorfer Unternehmen Rheinmetall AG gefertigt, das regelmäßig Aufträge über hunderte Millionen Euro, von der Bundesregierung erhält.</p>
 
-      <h3>Geplante Beschaffungen und deren Kosten</h3>
-      
-      <p>Mit den zusätzlichen Mitteln plant die Bundesregierung umfangreiche Investitionen in die Modernisierung der Bundeswehr. Dazu gehören unter anderem:</p>
-      
-      <div class="military-list">
-        <p>Kampfpanzer Leopard 2A8: Beschaffung von 18 zusätzlichen Einheiten zu einem Stückpreis von etwa 15 Millionen Euro, insgesamt rund 270 Millionen Euro.</p>
-        
-        <p>Schützenpanzer Puma: Nachrüstung von 143 Fahrzeugen auf den modernsten Konstruktionsstandard S1 für insgesamt 2,6 Milliarden Euro.</p>
-        
-        <p>Kampfflugzeuge F-35A: Anschaffung von 35 Jets mit einem Gesamtvolumen von etwa 8 Milliarden Euro.</p>
-        
-        <p>Schwere Transporthubschrauber CH-47F Chinook: Bestellung von 60 Einheiten für insgesamt 5 Milliarden Euro.</p>
-      </div>
-      
-      <p>Diese Investitionen zielen darauf ab, die Einsatzbereitschaft und Schlagkraft der Bundeswehr signifikant zu erhöhen.</p>
+              <p>Weitere fünf Milliarden Euro sollen an den US-amerikanischen Hersteller Boeing fließen, für die Lieferung von 60 CH-47F Chinook Transporthubschraubern. Acht Milliarden Euro soll die Bestellung von 35 Kampfjets der Klasse F-35A kosten, an deren Produktion ebenfalls Rheinmetall beteiligt ist. Die Liste an horrenden Ausgaben ist lang, ebenso die der deutschen und ausländischen Unternehmen, die damit Rekordgewinne einfahren können. Unterdessen schießen die Aktienkurse vieler europäischer Rüstungsunternehmen, seit dem Beschluss im deutschen Bundestag, in die Höhe. Die Aktionäre können zur Zeit außergewöhnlich hohe Gewinne, zu Lasten der zukünftigen Steuerzahler:innen, einfahren. Eine perfide Politik, die mindestens einer kritischen Beleuchtung bedarf.</p>
 
-      <h3>Deutsche Rüstungsunternehmen und ihre Beteiligung</h3>
-      
-      <p>Mehrere deutsche Unternehmen sind maßgeblich an der Ausstattung der Bundeswehr und dem Export von Rüstungsgütern beteiligt:</p>
-      
-      <div class="military-list">
-        <p>Rheinmetall AG: Beteiligt an der Produktion des Schützenpanzers Puma und des Kampfpanzers Leopard 2. Im Juni 2024 erhielt Rheinmetall einen Auftrag über 8,5 Milliarden Euro zur Lieferung von Artilleriemunition.</p>
-        
-        <p>Krauss-Maffei Wegmann (KMW): Produziert unter anderem den Leopard 2 und die Panzerhaubitze 2000. Das Unternehmen ist Teil der deutsch-französischen KNDS-Gruppe.</p>
-        
-        <p>Thyssenkrupp Marine Systems: Spezialisiert auf den Bau von U-Booten und Marineschiffen.</p>
-        
-        <p>Diehl Defence: Hersteller von Lenkflugkörpern und Munition.</p>
-        
-        <p>MBDA Deutschland: Entwickelt und produziert Lenkflugkörpersysteme.</p>
-        
-        <p>Heckler & Koch: Bekannt für die Produktion von Handfeuerwaffen wie dem G36-Gewehr.</p>
-        
-        <p>Airbus Defence and Space: Beteiligt an der Produktion von Militärflugzeugen und Satellitensystemen.</p>
-      </div>
-      
-      <p>Diese Unternehmen spielen eine zentrale Rolle in der deutschen Sicherheits- und Verteidigungsindustrie und profitieren erheblich von den staatlichen Investitionen in die Bundeswehr.</p>
+              <p>Der Schuldenpanzer soll dieses System karikieren und ad absurdum führen. Eine desfunktionale Bundeswehr und die defekte Ausrüstung ersticken in einer gigantischen Geldblase, die einen tatsächlichen Wandel in der Verteidigungsfähigkeit verfehlt. Die politische Grobmotorik der CDU Regierung gibt eine einfache Antwort auf ein hyperkomplexes Problem. Der Schuldenpanzer soll die Abstraktion des Problems verdeutlichen und mit der simplen Lösung, Neuverschuldung, kontrastieren. Auch die fehlende Berücksichtigung sozialer und ökologischer Herausforderungen wird bemängelt.</p>
 
-      <h3>Diskussion über die Wiedereinführung der Wehrpflicht</h3>
+              <p>Es entsteht eine mehrschichtige Arbeit, die durch die Augmented Reality Funktion, in die Realität übersetzt werden kann. Gedacht vor dem Bundeskanzleramt in Berlin, als direkte Konfrontation mit den Entscheidungsträger:innen, kann das Werk auch sonst jederzeit und überall abgerufen werden.</p>
+            </div>
+          </div>
+        </article>
+      </main>
       
-      <p>Die veränderte sicherheitspolitische Lage hat in Deutschland eine intensive Debatte über die Wiedereinführung der Wehrpflicht entfacht.</p>
-      
-      <p>Befürworter argumentieren, dass die Aussetzung der Wehrpflicht nicht mehr zur aktuellen Gefährdungslage passe. Florian Hahn, verteidigungspolitischer Sprecher der CDU/CSU-Bundestagsfraktion, forderte: "Noch im Jahr 2025 müssen die ersten Wehrpflichtigen durch die Kasernentore schreiten." Auch der Vorsitzende des Bundeswehrverbands, André Wüstner, plädierte für eine rasche Wiedereinführung nach skandinavischem Vorbild, um den Personalbedarf der Bundeswehr zu decken.</p>
-      
-      <p>Gegner der Wehrpflicht weisen auf erhebliche praktische und ethische Bedenken hin. Der SPD-Verteidigungsexperte Falko Droßmann bezeichnete die Forderungen als "unmöglich wie auch unzeitgemäß" und betonte den Abbau der notwendigen Strukturen seit der Aussetzung der Wehrpflicht im Jahr 2011.</p>
-      
-      <div class="sources">
-        <h3>Quellen</h3>
-        <ul>
-          <li>1&1</li>
-          <li>ZEIT ONLINE</li>
-          <li>Wikipedia – Die freie Enzyklopädie</li>
-          <li>Hasepost Zeitung für Osnabrück</li>
-        </ul>
-      </div>
+      <footer>
+        <p>Kunstprojekt von Jan Almstadt, im Rahmen des Kostümdesignstudiums an der HAW Hamburg. 3. Semester.</p>
+        <p>Mail: jan.almstadt(at)haw-hamburg.de</p>
+      </footer>
     </div>
   </div>
 
